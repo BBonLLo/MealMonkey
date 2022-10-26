@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_map">
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="com.example.mealmonkey.Map"
+        android:label="@string/title_map"
+        tools:layout="@layout/activity_map" />
+
+    <fragment
+        android:id="@+id/navigation_feed"
+        android:name="com.example.mealmonkey.Feed"
+        android:label="@string/title_feed"
+        tools:layout="@layout/activity_feed" />
+
+    <fragment
+        android:id="@+id/navigation_about"
+        android:name="com.example.mealmonkey.About"
+        android:label="@string/title_about"
+        tools:layout="@layout/activity_about" />
+</navigation>
