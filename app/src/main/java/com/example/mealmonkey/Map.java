@@ -10,13 +10,7 @@ import android.view.Window;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.ToggleButton;
-import android.widget.Toolbar;
 
-import com.example.mealmonkey.databinding.ActivityMapsBinding;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Map extends AppCompatActivity {

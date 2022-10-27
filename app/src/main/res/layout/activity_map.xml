@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Map">
 
-    <include layout="@layout/activity_maps" />
-
     <RelativeLayout
         android:layout_width="120dp"
         android:layout_height="48dp"
@@ -62,8 +60,6 @@
                 android:textOff=""
                 android:textOn="" />
 
-            <!--
-            -->
         </RelativeLayout>
     </RelativeLayout>
 

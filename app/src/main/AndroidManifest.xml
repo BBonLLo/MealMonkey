@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mealmonkey">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -30,17 +33,16 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name=".Map"
+            android:name=".MapsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".MapsActivity"
-            android:exported="false"/>
+            android:name=".Map"
+            android:exported="true" />
         <activity
             android:name=".About"
             android:exported="false" />

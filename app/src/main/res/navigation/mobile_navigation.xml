@@ -9,7 +9,7 @@
         android:id="@+id/navigation_map"
         android:name="com.example.mealmonkey.Map"
         android:label="@string/title_map"
-        tools:layout="@layout/activity_map" />
+        tools:layout="@layout/activity_maps" />
 
     <fragment
         android:id="@+id/navigation_feed"

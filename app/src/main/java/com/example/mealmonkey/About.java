@@ -25,7 +25,7 @@ public class About extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.map:
-                        startActivity(new Intent(getApplicationContext(), Map.class));
+                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.feed:
