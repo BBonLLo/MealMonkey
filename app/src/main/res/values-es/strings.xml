@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Meal Monkey</string>
+    <string name="title_map">Mapa</string>
+    <string name="title_feed">Contenido</string>
+    <string name="title_about">Sobre nosotros</string>
+    <string name="title_activity_maps">ActividadMapa</string>
+    <string name="text_error_not_implemented">No implementado todavia</string>
+    <string name="text_add_restaurant">Añadir restaurante</string>
+    <string name="text_mark_it">Marcalo! 😋🍴</string>
+    <string name="text_about_us"><b>Equipo:</b> CIFP Tartanga LHII - G4</string>
+    <string name="title_floating_button_languages">BotonFlotante</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_english">English</string>
+    <string name="text_choose_language">Elige un idioma</string>
+</resources>

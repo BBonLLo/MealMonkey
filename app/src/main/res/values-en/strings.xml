@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Meal Monkey</string>
     <string name="title_map">Map</string>
@@ -7,7 +8,7 @@
     <string name="text_error_not_implemented">Not implemented yet</string>
     <string name="text_add_restaurant">Add restaurant</string>
     <string name="text_mark_it">Mark it! 😋🍴</string>
-    <string name="text_about_us"><b>Team:</b> CIFP Tartanga LHII - G4\n</string>
+    <string name="text_about_us"><b>Team:</b> CIFP Tartanga LHII - G4</string>
     <string name="title_floating_button_languages">FloatingButton</string>
     <string name="language_spanish">Español</string>
     <string name="language_english">English</string>

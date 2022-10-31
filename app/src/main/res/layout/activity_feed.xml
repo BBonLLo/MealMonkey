@@ -11,9 +11,26 @@
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         app:itemBackground="@color/light_yellow"
-        app:itemTextColor="@drawable/selector_menubar"
         app:itemIconTint="@drawable/selector_menubar"
-        app:menu="@menu/bottom_nav_menu"
-        android:layout_alignParentBottom="true" />
+        app:itemTextColor="@drawable/selector_menubar"
+        app:menu="@menu/bottom_nav_menu" >
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButtonLanguages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="81dp"
+        android:clickable="true"
+        android:contentDescription="@string/title_floating_button_languages"
+        android:focusable="true"
+        app:backgroundTint="@color/yellow"
+        app:srcCompat="@drawable/ic_language"
+        tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
+
 </RelativeLayout>
