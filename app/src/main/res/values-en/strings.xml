@@ -6,11 +6,14 @@
     <string name="title_about">About us</string>
     <string name="title_activity_maps">MapActivity</string>
     <string name="text_error_not_implemented">Not implemented yet</string>
-    <string name="text_add_restaurant">Add restaurant</string>
     <string name="text_mark_it">Mark it! 😋🍴</string>
     <string name="text_about_us"><b>Team:</b> CIFP Tartanga LHII - G4</string>
     <string name="title_floating_button_languages">FloatingButton</string>
     <string name="language_spanish">Español</string>
     <string name="language_english">English</string>
     <string name="text_choose_language">Choose a language</string>
+    <string name="name">Name</string>
+    <string name="date">Date</string>
+    <string name="description">Description</string>
+    <string name="text_add">Add it!</string>
 </resources>

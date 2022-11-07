@@ -17,7 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MealMonkey"
         tools:targetApi="31">
-
+        <activity
+            android:name=".RestaurantAdd"
+            android:exported="false" />
+        <activity
+            android:name=".RestaurantDetails"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -37,9 +42,10 @@
             android:name=".MapsActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" >
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

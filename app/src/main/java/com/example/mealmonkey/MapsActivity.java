@@ -88,6 +88,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return false;
             }
         });
+
+        buttonMarkIt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MapsActivity.this, RestaurantAdd.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void notImplemented() {
@@ -122,7 +130,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16.5f));
                 MarkerOptions newMarker = new MarkerOptions();
                 newMarker.position(latLng)
-                        .title(String.valueOf(R.string.text_add_restaurant))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
                 mMap.addMarker(newMarker);
                 buttonMarkIt.animate();
@@ -134,8 +141,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15));
-                return false;
+                if (marker.getTitle() == null) {
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15));
+                    return false;
+                } else {
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15));
+                    marker.getTitle();
+
+                    Intent intent = new Intent(MapsActivity.this, RestaurantDetails.class);
+                    intent.putExtra("TITLE", marker.getTitle());
+                    startActivity(intent);
+                    return false;
+                }
             }
         });
     }
