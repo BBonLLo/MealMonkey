@@ -17,4 +17,5 @@
     <string name="text_rating_bar" translatable="false">RatingBar</string>
     <string name="description">Description</string>
     <string name="text_add">Add it!</string>
+    <string name="text_loading">Loading...</string>
 </resources>

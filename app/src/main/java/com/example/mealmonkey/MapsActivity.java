@@ -57,12 +57,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                mMap.clear();
                 if (b) {
                     tbRight.setChecked(true);
                     tbLeft.setChecked(false);
+                    loadMarkers();
                 } else {
                     tbRight.setChecked(false);
                     tbLeft.setChecked(true);
+                    loadMarkersGroup();
                 }
             }
         });
@@ -163,6 +166,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng santutxu = new LatLng(43.25419917602184, -2.911833814662221);
 
         Marker markerBilbao = mMap.addMarker(new MarkerOptions().position(bilbao).title("Bilbao").icon(BitmapDescriptorFactory.defaultMarker(45)));
+        Marker markerSantutxu = mMap.addMarker(new MarkerOptions().position(santutxu).title("Santutxu").icon(BitmapDescriptorFactory.defaultMarker(45)));
+
+    }
+
+    private void loadMarkersGroup() {
+
+        LatLng santutxu = new LatLng(43.25419917602184, -2.911833814662221);
+
         Marker markerSantutxu = mMap.addMarker(new MarkerOptions().position(santutxu).title("Santutxu").icon(BitmapDescriptorFactory.defaultMarker(45)));
 
     }

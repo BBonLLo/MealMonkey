@@ -16,4 +16,5 @@
     <string name="date">Date</string>
     <string name="description">Description</string>
     <string name="text_add">Add it!</string>
+    <string name="text_loading">Loading...</string>
 </resources>
