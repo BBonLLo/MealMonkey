@@ -61,11 +61,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (b) {
                     tbRight.setChecked(true);
                     tbLeft.setChecked(false);
-                    loadMarkers();
+                    loadMarkersGroup();
                 } else {
                     tbRight.setChecked(false);
                     tbLeft.setChecked(true);
-                    loadMarkersGroup();
+                    loadMarkers();
                 }
             }
         });
