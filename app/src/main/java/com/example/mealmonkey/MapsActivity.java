@@ -43,6 +43,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        String email = getIntent().getStringExtra("email");
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -80,11 +82,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     case R.id.map:
                         return true;
                     case R.id.feed:
-                        startActivity(new Intent(getApplicationContext(), Feed.class));
+                        startActivity(new Intent(getApplicationContext(), Feed.class).putExtra("email", email));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.about:
-                        startActivity(new Intent(getApplicationContext(), About.class));
+                        startActivity(new Intent(getApplicationContext(), About.class).putExtra("email", email));
                         overridePendingTransition(0, 0);
                         return true;
                 }

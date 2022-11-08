@@ -17,7 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MealMonkey"
         tools:targetApi="31">
-
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -47,6 +46,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AuthActivity"
+            android:exported="true" />
         <activity
             android:name=".MapsActivity"
             android:exported="true"

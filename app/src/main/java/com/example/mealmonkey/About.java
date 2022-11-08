@@ -23,6 +23,8 @@ public class About extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         getSupportActionBar().hide();
 
+        String email = getIntent().getStringExtra("email");
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.about);
 
@@ -31,11 +33,11 @@ public class About extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.map:
-                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MapsActivity.class).putExtra("email", email));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.feed:
-                        startActivity(new Intent(getApplicationContext(), Feed.class));
+                        startActivity(new Intent(getApplicationContext(), Feed.class).putExtra("email", email));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.about:

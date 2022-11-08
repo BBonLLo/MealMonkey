@@ -25,10 +25,11 @@ public class Feed extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale();
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_feed);
-        getSupportActionBar().hide();
+
+        String email = getIntent().getStringExtra("email");
+        setTitle(email);
+
+        getIntent().getExtras().getString("name");
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.feed);
@@ -39,13 +40,13 @@ public class Feed extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.map:
-                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MapsActivity.class).putExtra("email", email));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.feed:
                         return true;
                     case R.id.about:
-                        startActivity(new Intent(getApplicationContext(), About.class));
+                        startActivity(new Intent(getApplicationContext(), About.class).putExtra("email", email));
                         overridePendingTransition(0, 0);
                         return true;
                 }
