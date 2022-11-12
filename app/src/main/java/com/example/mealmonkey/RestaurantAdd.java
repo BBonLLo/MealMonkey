@@ -61,6 +61,7 @@ public class RestaurantAdd extends AppCompatActivity {
                 marker.put("LatLong", markerPos);
                 marker.put("User", email);
 
+                //Añadir marcador a la base de datos
                 db.collection("markers").document(textViewNameAdd.getText().toString()).set(marker)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
