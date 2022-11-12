@@ -24,8 +24,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.example.mealmonkey.databinding.ActivityMapsBinding;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -35,6 +44,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Switch aSwitch;
     private ToggleButton tbLeft, tbRight;
     private Button buttonMarkIt;
+    private MarkerOptions newMarkerO;
+    private String email;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        String email = getIntent().getStringExtra("email");
+        email = getIntent().getStringExtra("email");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -97,7 +109,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         buttonMarkIt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Double latitude = newMarkerO.getPosition().latitude;
+                Double longitude = newMarkerO.getPosition().longitude;
+
                 Intent intent = new Intent(MapsActivity.this, RestaurantAdd.class);
+                intent.putExtra("email", email);
+                intent.putExtra("lat", latitude);
+                intent.putExtra("long", longitude);
                 startActivity(intent);
             }
         });
@@ -131,15 +149,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(@NonNull LatLng latLng) {
-                mMap.clear();
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16.5f));
-                MarkerOptions newMarker = new MarkerOptions();
-                newMarker.position(latLng)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-                mMap.addMarker(newMarker);
-                buttonMarkIt.animate();
-                buttonMarkIt.setVisibility(View.VISIBLE);
-                loadMarkers();
+                if (!aSwitch.isChecked()) {
+                    mMap.clear();
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16.5f));
+                    MarkerOptions newMarker = new MarkerOptions();
+                    newMarker.position(latLng)
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                    newMarkerO = newMarker;
+                    mMap.addMarker(newMarker);
+                    buttonMarkIt.animate();
+                    buttonMarkIt.setVisibility(View.VISIBLE);
+                    loadMarkers();
+                }
             }
         });
 
@@ -163,13 +184,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void loadMarkers() {
+        //DocumentReference docRef = db.collection("cities").document("BJ");
 
+        CollectionReference deliveryRef = db.collection("markers");
+        Query nameQuery = deliveryRef.orderBy("Name");
+        nameQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String getId = document.getId();
+                        db.collection("markers").document(getId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if (email.equals(documentSnapshot.getString("User"))) {
+                                    String name = documentSnapshot.getString("Name");
+                                    double latPos = Double.parseDouble(documentSnapshot.getString("Lat"));
+                                    double longPos = Double.parseDouble(documentSnapshot.getString("Long"));
+
+                                    LatLng latLong = new LatLng(latPos, -longPos);
+                                    Marker newMarker = mMap.addMarker(new MarkerOptions().position(latLong).title(name).icon(BitmapDescriptorFactory.defaultMarker(45)));
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+        /*
         LatLng bilbao = new LatLng(43.263021508769505, -2.9349855166425436);
         LatLng santutxu = new LatLng(43.25419917602184, -2.911833814662221);
 
         Marker markerBilbao = mMap.addMarker(new MarkerOptions().position(bilbao).title("Bilbao").icon(BitmapDescriptorFactory.defaultMarker(45)));
         Marker markerSantutxu = mMap.addMarker(new MarkerOptions().position(santutxu).title("Santutxu").icon(BitmapDescriptorFactory.defaultMarker(45)));
-
+*/
     }
 
     private void loadMarkersGroup() {

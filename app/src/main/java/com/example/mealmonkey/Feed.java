@@ -21,19 +21,20 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Locale;
 
 public class Feed extends AppCompatActivity {
+    private FloatingActionButton floatingActionButtonLanguages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_about);
+        getSupportActionBar().hide();
+        loadLocale();
 
         String email = getIntent().getStringExtra("email");
-        setTitle(email);
-
-        getIntent().getExtras().getString("name");
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.feed);
-        FloatingActionButton floatingActionButtonLanguages = findViewById(R.id.floatingActionButtonLanguages);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -54,6 +55,7 @@ public class Feed extends AppCompatActivity {
             }
         });
 
+        floatingActionButtonLanguages = findViewById(R.id.floatingActionButtonLanguages);
         floatingActionButtonLanguages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

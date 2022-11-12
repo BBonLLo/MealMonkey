@@ -15,8 +15,7 @@
         app:itemBackground="@color/light_yellow"
         app:itemIconTint="@drawable/selector_menubar"
         app:itemTextColor="@drawable/selector_menubar"
-        app:menu="@menu/bottom_nav_menu" >
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:menu="@menu/bottom_nav_menu" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonLanguages"

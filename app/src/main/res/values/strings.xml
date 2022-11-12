@@ -23,4 +23,5 @@
     <string name="text_email" translatable="false">Email</string>
     <string name="text_password">Password</string>
     <string name="error_authentication">Error in the authentication</string>
+    <string name="text_gif" translatable="false">gif</string>
 </resources>

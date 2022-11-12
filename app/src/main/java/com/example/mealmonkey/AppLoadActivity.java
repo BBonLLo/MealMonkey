@@ -6,14 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.MediaController;
-import android.widget.VideoView;
 import android.net.Uri;
+
+import com.bumptech.glide.Glide;
 
 public class AppLoadActivity extends AppCompatActivity {
 
-    private VideoView videoView;
-    private final int DURATION_SPLASH = 1800;
+    private ImageView imageView;
+    private final int DURATION_SPLASH = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +24,11 @@ public class AppLoadActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_app_load);
 
-        videoView = findViewById(R.id.videoView3);
-        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.burger;
-        Uri uri = Uri.parse(videoPath);
-        videoView.setVideoURI(uri);
+        String urlGif = "https://c.tenor.com/OtltxmQRCh4AAAAi/burger-burger-time.gif";
 
-        MediaController mediaController = new MediaController(this);
-        videoView.setMediaController(mediaController);
-        mediaController.setAnchorView(videoView);
+        imageView = findViewById(R.id.imageView);
+        Uri uri = Uri.parse(urlGif);
+        Glide.with(getApplicationContext()).load(uri).into(imageView);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -39,11 +38,5 @@ public class AppLoadActivity extends AppCompatActivity {
                 finish();
             }
         }, DURATION_SPLASH);
-        /*try {
-            Thread.sleep(5000);
-            Intent intent = new Intent(AppLoadActivity.this, MapsActivity.class);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
     }
 }
