@@ -21,4 +21,7 @@
     <string name="text_login">Acceder</string>
     <string name="text_password">Contraseña</string>
     <string name="error_authentication">Error en la autentificación</string>
+    <string name="score">Puntuación</string>
+    <string name="text_marker_added">¡Marcador añadido!</string>
+    <string name="error_marker_not_added">Error, marcador no añadido</string>
 </resources>

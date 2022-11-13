@@ -79,16 +79,18 @@ public class Feed extends AppCompatActivity {
         db.collection("markers").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     /*TableRow tableRow = new TableRow(null);
                     tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
                     tableRow.setMinimumHeight(120);
                     tableLayout.addView(tableRow);*/
 
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Map<String, Object> m = document.getData();
-                        textView.append("~~~~~~~~~~~~~~~~~~~~~~~~\nNombre: " + m.get("Name") + "\n" + "Descripción: "
-                                + m.get("Description") + "\n" + "Puntuación: " + m.get("Score"));
+                        if (email.equals(document.get("User"))) {
+                            Map<String, Object> m = document.getData();
+                            textView.append("~~~~~~~~~~~~~~~~~~~~~~~~\n" + R.string.name +": " + m.get("Name") + "\n" + R.string.description +": "
+                                    + m.get("Description") + "\n" + R.string.score + ": " + m.get("Score") + " ☆\n");
+                        }
                     }
                 }
             }

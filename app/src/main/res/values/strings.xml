@@ -24,4 +24,7 @@
     <string name="text_password">Password</string>
     <string name="error_authentication">Error in the authentication</string>
     <string name="text_gif" translatable="false">gif</string>
+    <string name="score">Score</string>
+    <string name="text_marker_added">Marker added!</string>
+    <string name="error_marker_not_added">Error, marker not added</string>
 </resources>
