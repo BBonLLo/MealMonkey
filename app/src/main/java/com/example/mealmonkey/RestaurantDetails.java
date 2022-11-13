@@ -66,8 +66,6 @@ public class RestaurantDetails extends AppCompatActivity {
                                     latPos = Double.parseDouble(markers.get("Lat").toString());
                                     longPos = Double.parseDouble(markers.get("Long").toString());
                                     score = Float.parseFloat(markers.get("Score").toString());
-                                } else {
-                                    Toast.makeText(RestaurantDetails.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             }
                             details_description.setText(desc);
@@ -84,7 +82,8 @@ public class RestaurantDetails extends AppCompatActivity {
         imageButtonMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri gmmIntentUri = Uri.parse("geo:" + latPos + "," + longPos);
+                title = title.replace("\\s+", "+");
+                Uri gmmIntentUri = Uri.parse("geo:" + latPos + "," + longPos + "?z=18&q=" + title); //
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);

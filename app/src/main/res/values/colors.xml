@@ -12,5 +12,6 @@
     <color name="golden_yellow">#ffbf00</color>
     <color name="orange">#dc8219</color>
     <color name="light_yellow">#FFFEF7</color>
+    <color name="light_yellow_transparent">#A6FFFAD8</color>
     <color name="red">#FA6565</color>
 </resources>
