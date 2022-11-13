@@ -29,9 +29,7 @@ import java.util.Map;
 public class RestaurantDetails extends AppCompatActivity {
 
     private ImageButton imageButtonMaps;
-    private TextView details_text_name;
     private TextView details_name;
-    private TextView details_text_description;
     private TextView details_description;
     private RatingBar ratingBar;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -40,8 +38,6 @@ public class RestaurantDetails extends AppCompatActivity {
     private float score;
     private double latPos;
     private double longPos;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +49,8 @@ public class RestaurantDetails extends AppCompatActivity {
         title = getIntent().getStringExtra("TITLE");
 
         imageButtonMaps = findViewById(R.id.imageButtonMapDetails);
-        details_text_name = findViewById(R.id.details_text_name);
         details_name = findViewById(R.id.details_name);
         details_name.setText(title);
-        details_text_description = findViewById(R.id.details_text_description);
         details_description = findViewById(R.id.details_description);
         ratingBar = findViewById(R.id.ratingBarDetails);
 
@@ -72,19 +66,13 @@ public class RestaurantDetails extends AppCompatActivity {
                                     latPos = Double.parseDouble(markers.get("Lat").toString());
                                     longPos = Double.parseDouble(markers.get("Long").toString());
                                     score = Float.parseFloat(markers.get("Score").toString());
-
-
                                 } else {
                                     Toast.makeText(RestaurantDetails.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 }
-
                             }
-
                             details_description.setText(desc);
                             ratingBar.setRating(score);
-
                         }
-
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -92,7 +80,6 @@ public class RestaurantDetails extends AppCompatActivity {
                         Toast.makeText(RestaurantDetails.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-
 
         imageButtonMaps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +91,4 @@ public class RestaurantDetails extends AppCompatActivity {
             }
         });
     }
-
-
 }
