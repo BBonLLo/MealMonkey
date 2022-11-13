@@ -32,7 +32,7 @@
         app:srcCompat="@drawable/ic_language"
         tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
@@ -40,11 +40,20 @@
         android:layout_marginBottom="56dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView5"
+        <!--
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:minHeight="120dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+        </TableRow>
+        -->
+    </TableLayout>
 
 </RelativeLayout>

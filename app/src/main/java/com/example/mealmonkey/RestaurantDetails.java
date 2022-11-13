@@ -46,7 +46,7 @@ public class RestaurantDetails extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_restaurant_details);
 
-        title = getIntent().getStringExtra("TITLE");
+        title = getIntent().getStringExtra("title");
 
         imageButtonMaps = findViewById(R.id.imageButtonMapDetails);
         details_name = findViewById(R.id.details_name);

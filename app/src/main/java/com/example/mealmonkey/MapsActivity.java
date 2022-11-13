@@ -183,7 +183,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     marker.getTitle();
 
                     Intent intent = new Intent(MapsActivity.this, RestaurantDetails.class);
-                    intent.putExtra("TITLE", marker.getTitle());
+                    intent.putExtra("title", marker.getTitle());
                     startActivity(intent);
                     return false;
                 }
