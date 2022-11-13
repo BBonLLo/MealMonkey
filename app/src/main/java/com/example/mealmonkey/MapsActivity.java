@@ -122,6 +122,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 intent.putExtra("lat", latitude);
                 intent.putExtra("long", longitude);
                 startActivity(intent);
+                mMap.clear();
+                buttonMarkIt.setVisibility(View.INVISIBLE);
+                loadMarkers();
             }
         });
     }
@@ -202,7 +205,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     double longPos = Double.parseDouble(markers.get("Long").toString());
 
                                     LatLng latLong = new LatLng(latPos, longPos);
-                                    Marker newMarker = mMap.addMarker(new MarkerOptions().position(latLong).title(name).icon(BitmapDescriptorFactory.defaultMarker(45)));
+                                    Marker newMarker = mMap.addMarker(new MarkerOptions().position(latLong).title(name).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
                                 }
                             }
                         } else {
@@ -232,7 +235,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 LatLng latLong = new LatLng(latPos, longPos);
                                 if (email.equals(document.get("User"))) {
-                                    Marker newMarker = mMap.addMarker(new MarkerOptions().position(latLong).title(name).icon(BitmapDescriptorFactory.defaultMarker(60)));
+                                    Marker newMarker = mMap.addMarker(new MarkerOptions().position(latLong).title(name).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
                                 } else {
                                     Marker newMarker = mMap.addMarker(new MarkerOptions().position(latLong).title(name).icon(BitmapDescriptorFactory.defaultMarker(45)));
                                 }

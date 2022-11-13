@@ -27,7 +27,7 @@ public class Feed extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_about);
+        setContentView(R.layout.activity_feed);
         getSupportActionBar().hide();
         loadLocale();
 
@@ -74,17 +74,19 @@ public class Feed extends AppCompatActivity {
                 switch (i) {
                     case 0:
                         setLocale("es");
+                        recreate();
                         break;
                     case 1:
                         setLocale("en");
+                        recreate();
                         break;
                     default:
                         dialogInterface.dismiss();
                         break;
                 }
+                dialogInterface.dismiss();
             }
         });
-
         AlertDialog lDialog = lBuilder.create();
         lDialog.show();
     }

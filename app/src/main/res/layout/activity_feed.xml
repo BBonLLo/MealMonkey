@@ -28,7 +28,7 @@
         android:clickable="true"
         android:contentDescription="@string/title_floating_button_languages"
         android:focusable="true"
-        app:backgroundTint="@color/yellow"
+        app:backgroundTint="@color/golden_yellow"
         app:srcCompat="@drawable/ic_language"
         tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
