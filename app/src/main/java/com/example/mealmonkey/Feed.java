@@ -13,15 +13,26 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Locale;
+import java.util.Map;
 
 public class Feed extends AppCompatActivity {
     private FloatingActionButton floatingActionButtonLanguages;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +44,8 @@ public class Feed extends AppCompatActivity {
 
         String email = getIntent().getStringExtra("email");
 
+        textView = findViewById(R.id.textMarkets);
+        //tableLayout.setLayoutParams(new TableLayout.LayoutParams());
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.feed);
 
@@ -60,6 +73,24 @@ public class Feed extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showChangeLanguagesDialog();
+            }
+        });
+
+        db.collection("markers").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    /*TableRow tableRow = new TableRow(null);
+                    tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
+                    tableRow.setMinimumHeight(120);
+                    tableLayout.addView(tableRow);*/
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Map<String, Object> m = document.getData();
+                        textView.append("~~~~~~~~~~~~~~~~~~~~~~~~\nNombre: " + m.get("Name") + "\n" + "Descripción: "
+                                + m.get("Description") + "\n" + "Puntuación: " + m.get("Score"));
+                    }
+                }
             }
         });
     }
