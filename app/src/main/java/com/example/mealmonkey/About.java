@@ -14,6 +14,7 @@ import android.widget.VideoView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class About extends AppCompatActivity {
+
     private VideoView videoView;
 
     @Override
