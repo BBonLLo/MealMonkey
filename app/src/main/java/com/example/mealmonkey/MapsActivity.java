@@ -25,16 +25,20 @@ import com.example.mealmonkey.databinding.ActivityMapsBinding;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Map;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -75,6 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (b) {
                     tbRight.setChecked(true);
                     tbLeft.setChecked(false);
+                    buttonMarkIt.setVisibility(View.INVISIBLE);
                     loadMarkersGroup();
                 } else {
                     tbRight.setChecked(false);
@@ -184,48 +189,66 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void loadMarkers() {
-        //DocumentReference docRef = db.collection("cities").document("BJ");
+        db.collection("markers").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (email.equals(document.get("User"))) {
+                                    Map<String, Object> markers = document.getData();
+                                    String name = markers.get("Name").toString();
+                                    double latPos = Double.parseDouble(markers.get("Lat").toString());
+                                    double longPos = Double.parseDouble(markers.get("Long").toString());
 
-        CollectionReference deliveryRef = db.collection("markers");
-        Query nameQuery = deliveryRef.orderBy("Name");
-        nameQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        String getId = document.getId();
-                        db.collection("markers").document(getId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                if (email.equals(documentSnapshot.getString("User"))) {
-                                    String name = documentSnapshot.getString("Name");
-                                    double latPos = Double.parseDouble(documentSnapshot.getString("Lat"));
-                                    double longPos = Double.parseDouble(documentSnapshot.getString("Long"));
-
-                                    LatLng latLong = new LatLng(latPos, -longPos);
+                                    LatLng latLong = new LatLng(latPos, longPos);
                                     Marker newMarker = mMap.addMarker(new MarkerOptions().position(latLong).title(name).icon(BitmapDescriptorFactory.defaultMarker(45)));
                                 }
                             }
-                        });
+                        } else {
+                            Toast.makeText(MapsActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
                     }
-                }
-            }
-        });
-        /*
-        LatLng bilbao = new LatLng(43.263021508769505, -2.9349855166425436);
-        LatLng santutxu = new LatLng(43.25419917602184, -2.911833814662221);
-
-        Marker markerBilbao = mMap.addMarker(new MarkerOptions().position(bilbao).title("Bilbao").icon(BitmapDescriptorFactory.defaultMarker(45)));
-        Marker markerSantutxu = mMap.addMarker(new MarkerOptions().position(santutxu).title("Santutxu").icon(BitmapDescriptorFactory.defaultMarker(45)));
-*/
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MapsActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     private void loadMarkersGroup() {
+        db.collection("markers").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> markers = document.getData();
+                                String name = markers.get("Name").toString();
+                                double latPos = Double.parseDouble(markers.get("Lat").toString());
+                                double longPos = Double.parseDouble(markers.get("Long").toString());
 
-        LatLng santutxu = new LatLng(43.25419917602184, -2.911833814662221);
+                                LatLng latLong = new LatLng(latPos, longPos);
+                                if (email.equals(document.get("User"))) {
+                                    Marker newMarker = mMap.addMarker(new MarkerOptions().position(latLong).title(name).icon(BitmapDescriptorFactory.defaultMarker(60)));
+                                } else {
+                                    Marker newMarker = mMap.addMarker(new MarkerOptions().position(latLong).title(name).icon(BitmapDescriptorFactory.defaultMarker(45)));
+                                }
+                            }
 
-        Marker markerSantutxu = mMap.addMarker(new MarkerOptions().position(santutxu).title("Santutxu").icon(BitmapDescriptorFactory.defaultMarker(45)));
-
+                        } else {
+                            Toast.makeText(MapsActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MapsActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
 }
