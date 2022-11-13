@@ -63,6 +63,7 @@ public class RestaurantAdd extends AppCompatActivity {
 
                 //Añadir marcador a la base de datos
                 db.collection("markers").document(textViewNameAdd.getText().toString()).set(marker)
+                        //mete en la base de datos el primary key con toda la informacion del objeto marker
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {

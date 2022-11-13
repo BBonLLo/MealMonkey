@@ -1,5 +1,6 @@
 package com.example.mealmonkey;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,20 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Map;
 
 public class RestaurantDetails extends AppCompatActivity {
 
@@ -19,7 +34,14 @@ public class RestaurantDetails extends AppCompatActivity {
     private TextView details_text_description;
     private TextView details_description;
     private RatingBar ratingBar;
-    private TextView textView;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String title;
+    private String desc;
+    private float score;
+    private double latPos;
+    private double longPos;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +50,7 @@ public class RestaurantDetails extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_restaurant_details);
 
-        String title = getIntent().getStringExtra("TITLE");
+        title = getIntent().getStringExtra("TITLE");
 
         imageButtonMaps = findViewById(R.id.imageButtonMapDetails);
         details_text_name = findViewById(R.id.details_text_name);
@@ -37,18 +59,51 @@ public class RestaurantDetails extends AppCompatActivity {
         details_text_description = findViewById(R.id.details_text_description);
         details_description = findViewById(R.id.details_description);
         ratingBar = findViewById(R.id.ratingBarDetails);
-        ratingBar.setRating(3.5f);
-        textView = findViewById(R.id.textView2);
-        textView.setText(title);
+
+        db.collection("markers").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (title.equals(document.get("Name"))) {
+                                    Map<String, Object> markers = document.getData();
+                                    desc = markers.get("Description").toString();
+                                    latPos = Double.parseDouble(markers.get("Lat").toString());
+                                    longPos = Double.parseDouble(markers.get("Long").toString());
+                                    score = Float.parseFloat(markers.get("Score").toString());
+
+
+                                } else {
+                                    Toast.makeText(RestaurantDetails.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+
+                            details_description.setText(desc);
+                            ratingBar.setRating(score);
+
+                        }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(RestaurantDetails.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
 
         imageButtonMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194");
+                Uri gmmIntentUri = Uri.parse("geo:" + latPos + "," + longPos);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
             }
         });
     }
+
+
 }
