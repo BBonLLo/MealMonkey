@@ -1,8 +1,10 @@
 package com.example.mealmonkey;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -121,12 +123,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 intent.putExtra("email", email);
                 intent.putExtra("lat", latitude);
                 intent.putExtra("long", longitude);
-                startActivity(intent);
-                mMap.clear();
-                buttonMarkIt.setVisibility(View.INVISIBLE);
-                loadMarkers();
+                startActivityForResult(intent, 1);
             }
         });
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        boolean name = data.getBooleanExtra("done", false);
+        if (name) {
+            Toast.makeText(MapsActivity.this, R.string.text_marker_added, Toast.LENGTH_LONG).show();
+            mMap.clear();
+            buttonMarkIt.setVisibility(View.INVISIBLE);
+            loadMarkers();
+        }
+        else {
+            Toast.makeText(MapsActivity.this, R.string.error_marker_not_added, Toast.LENGTH_LONG).show();
+        }
     }
 
     private void notImplemented() {

@@ -67,14 +67,19 @@ public class RestaurantAdd extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(RestaurantAdd.this, R.string.text_marker_added, Toast.LENGTH_LONG).show();
+                                boolean done = true;
+                                getIntent().putExtra("done", done);
+                                setResult(RESULT_OK, getIntent());
                                 finish();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(RestaurantAdd.this, R.string.error_marker_not_added, Toast.LENGTH_LONG).show();
+                                boolean done = false;
+                                getIntent().putExtra("done", done);
+                                setResult(RESULT_CANCELED, getIntent());
+                                finish();
                             }
                         });
 

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.net.Uri;
 
 import com.bumptech.glide.Glide;
@@ -26,7 +25,7 @@ public class AppLoadActivity extends AppCompatActivity {
 
         String urlGif = "https://c.tenor.com/OtltxmQRCh4AAAAi/burger-burger-time.gif";
 
-        imageView = findViewById(R.id.imageView);
+        imageView = findViewById(R.id.imageViewCatGif);
         Uri uri = Uri.parse(urlGif);
         Glide.with(getApplicationContext()).load(uri).into(imageView);
 

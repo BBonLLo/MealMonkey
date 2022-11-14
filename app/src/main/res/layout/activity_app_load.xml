@@ -8,7 +8,7 @@
     tools:context=".AppLoadActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textLoadingAppName"
         android:layout_width="210dp"
         android:layout_height="57dp"
         android:fontFamily="@font/caveat_bold"
@@ -22,8 +22,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.227" />
 
+    <ImageView
+        android:id="@+id/imageViewCatGif"
+        android:layout_width="137dp"
+        android:layout_height="204dp"
+        android:layout_marginTop="22dp"
+        android:contentDescription="@string/text_gif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textLoadingAppName"
+        app:srcCompat="@drawable/burger_burger_time" />
+
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/caveat_bold"
@@ -33,20 +44,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.118" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="137dp"
-        android:layout_height="204dp"
-        android:layout_marginTop="22dp"
-        android:contentDescription="@string/text_gif"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:srcCompat="@drawable/burger_burger_time" />
-
+        app:layout_constraintTop_toBottomOf="@+id/imageViewCatGif"
+        app:layout_constraintVertical_bias="0.05" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loadingAnimation"
@@ -56,6 +55,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textLoading"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loading" />
