@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,6 +54,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private MarkerOptions newMarkerO;
     private String email;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private MediaPlayer mediaPlayer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -132,8 +134,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        boolean name = data.getBooleanExtra("done", false);
-        if (name) {
+        boolean done = data.getBooleanExtra("done", false);
+        if (done) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.addmarker);
+            mediaPlayer.start();
             Toast.makeText(MapsActivity.this, R.string.text_marker_added, Toast.LENGTH_LONG).show();
             mMap.clear();
             buttonMarkIt.setVisibility(View.INVISIBLE);

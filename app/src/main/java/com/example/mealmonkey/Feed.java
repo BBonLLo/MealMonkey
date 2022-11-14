@@ -88,7 +88,7 @@ public class Feed extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         if (email.equals(document.get("User"))) {
                             Map<String, Object> m = document.getData();
-                            textView.append("~~~~~~~~~~~~~~~~~~~~~~~~\n" + getString(R.string.name) +": " + m.get("Name") + "\n" + getString(R.string.description) +": "
+                            textView.append("\n~~~~~~~~~~~~~~~~~~~~~~~~\n\n" + getString(R.string.name) +": " + m.get("Name") + "\n" + getString(R.string.description) +": "
                                     + m.get("Description") + "\n" + getString(R.string.score) + ": " + m.get("Score") + " ☆\n");
                         }
                     }
