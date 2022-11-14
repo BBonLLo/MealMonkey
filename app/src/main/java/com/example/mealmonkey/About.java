@@ -47,7 +47,6 @@ public class About extends AppCompatActivity {
                 return false;
             }
         });
-
         videoView = findViewById(R.id.videoView);
         String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.tartanga;
         Uri uri = Uri.parse(videoPath);
