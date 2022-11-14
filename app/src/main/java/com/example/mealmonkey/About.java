@@ -52,6 +52,7 @@ public class About extends AppCompatActivity {
         String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.tartanga;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
+        videoView.start();
 
         MediaController mediaController = new MediaController(this);
         videoView.setMediaController(mediaController);
