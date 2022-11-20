@@ -31,7 +31,7 @@
         app:layout_constraintHorizontal_bias="0.14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButtonMapAdd"
-        app:layout_constraintVertical_bias="0.051" />
+        app:layout_constraintVertical_bias="0.024" />
 
     <EditText
         android:id="@+id/add_name"
@@ -92,6 +92,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/text_add"
         android:textAllCaps="false"
+        android:background="@drawable/ic_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

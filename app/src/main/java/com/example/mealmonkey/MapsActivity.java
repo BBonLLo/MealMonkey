@@ -203,6 +203,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     Intent intent = new Intent(MapsActivity.this, RestaurantDetails.class);
                     intent.putExtra("title", marker.getTitle());
+                    intent.putExtra("email", email);
                     startActivity(intent);
                     return false;
                 }

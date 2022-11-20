@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -34,7 +35,9 @@ public class RestaurantDetails extends AppCompatActivity {
     private RatingBar ratingBar;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String title;
+    private String email;
     private String desc;
+    private Button button;
     private float score;
     private double latPos;
     private double longPos;
@@ -47,12 +50,14 @@ public class RestaurantDetails extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_details);
 
         title = getIntent().getStringExtra("title");
+        email = getIntent().getStringExtra("email");
 
         imageButtonMaps = findViewById(R.id.imageButtonMapDetails);
         details_name = findViewById(R.id.details_name);
         details_name.setText(title);
         details_description = findViewById(R.id.details_description);
         ratingBar = findViewById(R.id.ratingBarDetails);
+        button = findViewById(R.id.buttonEdit);
 
         db.collection("markers").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -87,6 +92,19 @@ public class RestaurantDetails extends AppCompatActivity {
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
+            }
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RestaurantDetails.this, RestaurantAdd.class);
+                intent.putExtra("name", title);
+                intent.putExtra("email", email);
+                intent.putExtra("latPos", latPos);
+                intent.putExtra("longPos", longPos);
+                startActivity(intent);
+                finish();
             }
         });
     }

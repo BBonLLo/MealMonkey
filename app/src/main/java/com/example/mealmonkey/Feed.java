@@ -44,8 +44,7 @@ public class Feed extends AppCompatActivity {
 
         String email = getIntent().getStringExtra("email");
 
-        textView = findViewById(R.id.textMarkets);
-        //tableLayout.setLayoutParams(new TableLayout.LayoutParams());
+        // textView = findViewById(R.id.textMarkets);  Quitar Comentario de este wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.feed);
 
