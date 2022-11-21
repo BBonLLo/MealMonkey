@@ -62,7 +62,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/textMarkets"
+                    android:id="@+id/textMarkers"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="30dp"
