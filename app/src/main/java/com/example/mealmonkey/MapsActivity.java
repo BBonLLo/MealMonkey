@@ -180,7 +180,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16.5f));
                     MarkerOptions newMarker = new MarkerOptions();
                     newMarker.position(latLng)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                            .icon(BitmapDescriptorFactory.defaultMarker(45));
                     newMarkerO = newMarker;
                     mMap.addMarker(newMarker);
                     buttonMarkIt.animate();
