@@ -58,6 +58,7 @@ public class RestaurantDetails extends AppCompatActivity {
         details_description = findViewById(R.id.details_description);
         ratingBar = findViewById(R.id.ratingBarDetails);
         button = findViewById(R.id.buttonEdit);
+        button.setVisibility(View.INVISIBLE);
 
         db.collection("markers").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -71,6 +72,9 @@ public class RestaurantDetails extends AppCompatActivity {
                                     latPos = Double.parseDouble(markers.get("Lat").toString());
                                     longPos = Double.parseDouble(markers.get("Long").toString());
                                     score = Float.parseFloat(markers.get("Score").toString());
+                                    if (email.equals(markers.get("User").toString())) {
+                                        button.setVisibility(View.VISIBLE);
+                                    }
                                 }
                             }
                             details_description.setText(desc);
