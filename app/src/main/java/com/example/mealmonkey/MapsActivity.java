@@ -142,8 +142,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.clear();
             buttonMarkIt.setVisibility(View.INVISIBLE);
             loadMarkers();
-        }
-        else {
+        } else {
             Toast.makeText(MapsActivity.this, R.string.error_marker_not_added, Toast.LENGTH_LONG).show();
         }
     }
@@ -223,9 +222,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     String name = markers.get("Name").toString();
                                     double latPos = Double.parseDouble(markers.get("Lat").toString());
                                     double longPos = Double.parseDouble(markers.get("Long").toString());
-
                                     LatLng latLong = new LatLng(latPos, longPos);
-                                    Marker newMarker = mMap.addMarker(new MarkerOptions().position(latLong).title(name).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
+                                    if (markers.get("Description").toString().equals("")) {
+                                        Marker newMarker = mMap.addMarker(new MarkerOptions().position(latLong).title(name).icon(BitmapDescriptorFactory.defaultMarker(315)));
+                                    } else {
+                                        Marker newMarker = mMap.addMarker(new MarkerOptions().position(latLong).title(name).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                                    }
                                 }
                             }
                         } else {
