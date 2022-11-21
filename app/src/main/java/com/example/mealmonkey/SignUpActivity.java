@@ -8,32 +8,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class AuthActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
-    private TextView emailEditText;
-    private TextView passwordEditText;
+    private TextInputEditText emailEditText;
+    private TextInputEditText passwordEditText;
     private Button signUpButton;
-    private Button logInbutton;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_auth);
+        setContentView(R.layout.activity_sign_up);
 
-        emailEditText = findViewById(R.id.emailEditText);
-        passwordEditText = findViewById(R.id.passwordEditText);
-        signUpButton = findViewById(R.id.signUpButton);
-        logInbutton = findViewById(R.id.logInbutton);
+        emailEditText = findViewById(R.id.email_edit_text_signup);
+        passwordEditText = findViewById(R.id.password_edit_text_signup);
+        signUpButton = findViewById(R.id.sign_up_button_signup);
 
         setup();
     }
@@ -49,25 +47,8 @@ public class AuthActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 showHome();
                             } else {
-                                Toast.makeText(AuthActivity.this, R.string.error_authentication, Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-            }
-        });
-
-        logInbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!emailEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {
-                    FirebaseAuth.getInstance().signInWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                showHome();
-                            } else {
-                                Toast.makeText(AuthActivity.this, R.string.error_authentication, Toast.LENGTH_SHORT).show();
+                                Snackbar.make(findViewById(R.id.my_coordinator_layout_login_signup), R.string.error_authentication, 3000)
+                                        .show();
                             }
                         }
                     });
@@ -77,7 +58,7 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void showHome() {
-        Intent mapIntent = new Intent(AuthActivity.this, MapsActivity.class);
+        Intent mapIntent = new Intent(SignUpActivity.this, MapsActivity.class);
         mapIntent.putExtra("email", emailEditText.getText().toString());
         startActivity(mapIntent);
     }

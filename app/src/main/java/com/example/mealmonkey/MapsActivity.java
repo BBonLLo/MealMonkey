@@ -11,8 +11,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -30,16 +28,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -73,11 +65,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         buttonMarkIt = findViewById(R.id.btnMarkIt);
         buttonMarkIt.setVisibility(View.INVISIBLE);
 
-        Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.text_snackbar, -2)
-                .setAction(R.string.text_ok, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {}
-                })
+        Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.text_snackbar, 2000)
                 .setActionTextColor(ContextCompat.getColor(this, R.color.black))
                 .setBackgroundTint(ContextCompat.getColor(this, R.color.orange))
                 .show();
