@@ -25,4 +25,5 @@
     <string name="text_marker_added">¡Marcador añadido!</string>
     <string name="error_marker_not_added">Error, marcador no añadido</string>
     <string name="text_edit">Editar</string>
+    <string name="text_snackbar">¡Toca para añadir un marcador!</string>
 </resources>

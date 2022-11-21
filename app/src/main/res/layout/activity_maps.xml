@@ -15,4 +15,7 @@
         tools:context=".MapsActivity" />
 
     <include layout="@layout/activity_map" />
+
+    <include layout="@layout/activity_map_coordinatorlayout" />
+
 </RelativeLayout>

@@ -25,4 +25,5 @@
     <string name="text_marker_added">Marker added!</string>
     <string name="error_marker_not_added">Error, marker not added</string>
     <string name="text_edit">Edit</string>
+    <string name="text_snackbar">Touch to add a marker!</string>
 </resources>

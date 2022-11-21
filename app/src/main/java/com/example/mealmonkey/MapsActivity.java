@@ -2,6 +2,7 @@ package com.example.mealmonkey;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
@@ -33,6 +34,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -65,16 +67,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         email = getIntent().getStringExtra("email");
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
         aSwitch = findViewById(R.id.switch1);
         tbLeft = findViewById(R.id.tbLeft);
         tbRight = findViewById(R.id.tbRight);
         buttonMarkIt = findViewById(R.id.btnMarkIt);
         buttonMarkIt.setVisibility(View.INVISIBLE);
+
+        Snackbar.make(findViewById(R.id.myCoordinatorLayout), R.string.text_snackbar, -2)
+                .setAction(R.string.text_ok, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {}
+                })
+                .setActionTextColor(ContextCompat.getColor(this, R.color.black))
+                .setBackgroundTint(ContextCompat.getColor(this, R.color.orange))
+                .show();
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
