@@ -235,7 +235,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     double longPos = Double.parseDouble(markers.get("Long").toString());
                                     LatLng latLong = new LatLng(latPos, longPos);
 
-                                    if (markers.get("Score").toString().equals("0")) {
+                                    if (Float.parseFloat(markers.get("Score").toString()) == 0) {
                                         Marker newMarker = mMap.addMarker(new MarkerOptions().position(latLong).title(name).icon(BitmapDescriptorFactory.defaultMarker(20)));
                                     } else {
                                         Marker newMarker = mMap.addMarker(new MarkerOptions().position(latLong).title(name).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
